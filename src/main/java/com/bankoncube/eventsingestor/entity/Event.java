@@ -1,6 +1,9 @@
 package com.bankoncube.eventsingestor.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
@@ -11,6 +14,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "EVENT")
 @Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Event {
 
     @Id
