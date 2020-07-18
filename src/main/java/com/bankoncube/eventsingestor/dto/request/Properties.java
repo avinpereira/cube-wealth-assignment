@@ -23,5 +23,7 @@ public class Properties {
     private Float value;
     @JsonProperty("mode")
     private String mode;
+    @JsonProperty("text")
+    private String text;
 
 }
