@@ -24,9 +24,7 @@ public class Event {
     private String latLong;
     private Integer timeSpentOnScreen;
 
-
-    @OneToOne
-//    @Embedded
+    @Embedded
     private Property property;
 
     @ManyToOne
