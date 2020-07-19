@@ -28,6 +28,7 @@ public class EventsIngestorApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		//Two Dummy Users
 		Customer customer1 = new Customer(null, 178766, "Avin Pereira", null);
 		Customer customer2 = new Customer(null, 178765, "Stella Pereira", null);
 		customerRepository.saveAll(Arrays.asList(customer1, customer2));

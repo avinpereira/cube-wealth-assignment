@@ -17,6 +17,7 @@ public class ExcessivePayEventRule implements Rule {
 
     private NotificationService notificationService;
     private boolean isEnabled;
+    private String description = "Excessive Pay Notification";
 
 
     @Autowired
@@ -25,7 +26,7 @@ public class ExcessivePayEventRule implements Rule {
     }
 
     @Override
-    public void implementRule(Event event, Customer customer) {
+    public void implementRule(Customer customer) {
         List<Event> eventList = customer.getEvents().stream()
                 .filter(e -> "pay".equals(e.getVerb()))
                 .filter(e -> Instant.now().minus(5, ChronoUnit.MINUTES).isBefore(e.getSourceTimestamp()))
@@ -45,5 +46,15 @@ public class ExcessivePayEventRule implements Rule {
     @Override
     public boolean isEnabled() {
         return this.isEnabled;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
     }
 }

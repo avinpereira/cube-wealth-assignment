@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 public class NotificationRule implements Rule {
 
     private NotificationService notificationService;
+    private boolean isEnabled;
+    private String description = "This is a Notification Rule";
 
     @Autowired
     public NotificationRule(NotificationService notificationService) {
@@ -18,17 +20,27 @@ public class NotificationRule implements Rule {
     }
 
     @Override
-    public void implementRule(Event event, Customer customer) {
+    public void implementRule(Customer customer) {
         if(customer.getEvents().isEmpty()) notificationService.sendPushNotification("Congrats on your first Event");
     }
 
     @Override
     public void enable(boolean isEnabled) {
-
+        this.isEnabled = isEnabled;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.isEnabled;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String getDescription() {
+        return  this.description;
     }
 }
