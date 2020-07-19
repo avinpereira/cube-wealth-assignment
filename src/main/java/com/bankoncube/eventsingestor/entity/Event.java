@@ -1,5 +1,6 @@
 package com.bankoncube.eventsingestor.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +33,19 @@ public class Event {
 
     @Embedded
     private Property property;
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", noun='" + noun + '\'' +
+                ", verb='" + verb + '\'' +
+                ", sourceTimestamp=" + sourceTimestamp +
+                ", latLong='" + latLong + '\'' +
+                ", timeSpentOnScreen=" + timeSpentOnScreen +
+                ", property=" + property +
+                '}';
+    }
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

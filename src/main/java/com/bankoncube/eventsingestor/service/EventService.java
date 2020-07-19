@@ -38,7 +38,7 @@ public class EventService {
 
         rules.stream()
                 .filter(Rule::isEnabled)
-                .forEach(r -> r.implementRule(event));
+                .forEach(r -> r.implementRule(event, customer));
 //        if(customer.getEvents().isEmpty() && "pay".equals(event.getVerb())) notificationService.sendPushNotification("Congrats on your first payment");
 
 //        this.processEvent(event);
