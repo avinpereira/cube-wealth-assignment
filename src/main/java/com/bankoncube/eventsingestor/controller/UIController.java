@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -46,6 +47,7 @@ public class UIController {
 //        System.out.println(wrapper.getRuleList() != null ? wrapper.getRuleList().size() : "null list");
         ArrayList<RuleWithSelection> ruleList = wrapperResponse.getRuleList();
         List<String> descriptions = ruleList.stream().map(RuleWithSelection::getDescription).collect(Collectors.toList());
+        descriptions = descriptions.stream().filter(Objects::nonNull).collect(Collectors.toList());
         for(String desc : descriptions){
             rules.stream()
                     .filter(r -> desc.equals(r.getDescription()))
