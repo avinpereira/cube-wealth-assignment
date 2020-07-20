@@ -43,6 +43,7 @@ public class ExcessivePayEventRule implements Rule {
         this.isEnabled = isEnabled;
     }
 
+
     @Override
     public boolean isEnabled() {
         return this.isEnabled;
@@ -56,5 +57,10 @@ public class ExcessivePayEventRule implements Rule {
     @Override
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public void toggle() {
+        this.isEnabled = !this.isEnabled;
     }
 }

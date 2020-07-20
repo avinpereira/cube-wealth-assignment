@@ -8,4 +8,5 @@ public interface Rule {
     boolean isEnabled();
     void setDescription(String description);
     String getDescription();
+    void toggle();
 }

@@ -36,11 +36,11 @@ public class IngestorController {
 
     }
 
-    @PostMapping("/rules")
-    public ResponseEntity<Void> updateRule(@RequestParam(value="description") String description){
-        Optional<Boolean> booleanStream = list.stream().filter(r -> description.equals(r.getDescription())).map(r -> r.isEnabled()).findFirst();
-        eventService.ingest(requestBody);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-
-    }
+//    @PostMapping("/rules")
+//    public ResponseEntity<Void> updateRule(@RequestParam(value="description") String description){
+//        Optional<Boolean> booleanStream = list.stream().filter(r -> description.equals(r.getDescription())).map(r -> r.isEnabled()).findFirst();
+//        eventService.ingest(requestBody);
+//        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+//
+//    }
 }

@@ -1,3 +1,3 @@
-function demo(description){
-alert(description)
+function demo(){
+alert("")
 }

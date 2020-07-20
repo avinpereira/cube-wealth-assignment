@@ -43,4 +43,9 @@ public class NotificationRule implements Rule {
     public String getDescription() {
         return  this.description;
     }
+
+    @Override
+    public void toggle() {
+        this.isEnabled = !this.isEnabled;
+    }
 }
