@@ -21,7 +21,7 @@ public class NotificationRule implements Rule {
 
     @Override
     public void implementRule(Customer customer) {
-        if(customer.getEvents().isEmpty()) notificationService.sendPushNotification("Congrats on your first Event");
+        if(customer.getEvents().isEmpty() || customer.getEvents().size() == 1) notificationService.sendPushNotification("Congrats on your first Event");
     }
 
     @Override

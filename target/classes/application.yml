@@ -13,19 +13,15 @@ spring:
     password: "docker"
     driver-class-name: org.postgresql.Driver
   jpa:
-    show-sql: true
+#    show-sql: true
     generate-ddl: true
     hibernate:
       ddl-auto: 'create-drop'
 
 
 logging:
-  level:
-    com.bankoncube.eventsingestor: INFO
   file:
     name: push-notifications
-#  pattern:
-#    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%'
 
 
 

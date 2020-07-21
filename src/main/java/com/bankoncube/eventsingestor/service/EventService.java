@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +22,10 @@ public class EventService {
 
     private EventRepository eventRepository;
     private CustomerRepository customerRepository;
+
     private List<Rule> rules;
+    @PersistenceContext
+    private EntityManager entityManager;
 
 
     @Autowired
@@ -34,7 +39,9 @@ public class EventService {
         Optional<Customer> optionalCustomer = customerRepository.findByCustomerId(requestBody.getUserId());
         Customer customer = optionalCustomer.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not Exist"));
         Event event = EventMapper.mapToEventEntity(requestBody, customer);
-        eventRepository.saveAndFlush(event);
+
+        eventRepository.save(event);
+//        entityManager.refresh(event);
 
         rules.stream()
                 .filter(Rule::isEnabled)
