@@ -5,7 +5,7 @@ spring:
     cache: false
   security:
     user:
-      name: avin
+      name: user
       password: password
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost/event}
