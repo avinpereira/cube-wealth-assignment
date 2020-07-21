@@ -19,3 +19,9 @@ spring:
       ddl-auto: 'create-drop'
 
 
+logging:
+  file:
+    name: push-notifications
+
+
+

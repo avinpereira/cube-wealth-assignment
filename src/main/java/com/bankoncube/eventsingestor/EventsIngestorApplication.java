@@ -3,6 +3,7 @@ package com.bankoncube.eventsingestor;
 import com.bankoncube.eventsingestor.entity.Customer;
 import com.bankoncube.eventsingestor.repository.CustomerRepository;
 import com.bankoncube.eventsingestor.rule_framework.Rule;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
+@Slf4j
 public class EventsIngestorApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -35,6 +37,7 @@ public class EventsIngestorApplication implements CommandLineRunner {
 
 		//Enabling All Rules at Start Up
 		rules.forEach(r -> r.enable(true));
+		log.info("Logger is Working");
 
 
 	}

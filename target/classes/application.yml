@@ -19,3 +19,13 @@ spring:
       ddl-auto: 'create-drop'
 
 
+logging:
+  level:
+    com.bankoncube.eventsingestor: INFO
+  file:
+    name: push-notifications
+#  pattern:
+#    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%'
+
+
+
