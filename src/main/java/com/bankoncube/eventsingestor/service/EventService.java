@@ -41,8 +41,6 @@ public class EventService {
         Event event = EventMapper.mapToEventEntity(requestBody, customer);
 
         eventRepository.save(event);
-//        entityManager.refresh(event);
-
         rules.stream()
                 .filter(Rule::isEnabled)
                 .forEach(r -> r.implementRule(customer));

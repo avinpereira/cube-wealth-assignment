@@ -17,7 +17,9 @@ public class ExcessivePayEventRule implements Rule {
 
     private NotificationService notificationService;
     private boolean isEnabled;
-    private String description = "Excessive Pay Notification";
+    private String description = "Alert user if 5 or more bill pay events of total value >= {constraint1} happen within {constraint2} minutes time window";
+    private Integer constraint1 = 20000;
+    private Integer constraint2 = 5;
 
 
     @Autowired
@@ -29,12 +31,12 @@ public class ExcessivePayEventRule implements Rule {
     public void implementRule(Customer customer) {
         List<Event> eventList = customer.getEvents().stream()
                 .filter(e -> "pay".equals(e.getVerb()))
-                .filter(e -> Instant.now().minus(5, ChronoUnit.MINUTES).isBefore(e.getSourceTimestamp()))
+                .filter(e -> Instant.now().minus(this.getConstraint2(), ChronoUnit.MINUTES).isBefore(e.getSourceTimestamp()))
                 .collect(Collectors.toList());
         if(eventList.size() >= 5) {
             double doubleStream = eventList.stream()
                     .mapToDouble(e -> e.getProperty().getValue()).sum();
-            if(doubleStream >= 20000) notificationService.sendPushNotification("Notification to Operator : " +
+            if(doubleStream >= this.constraint1) notificationService.sendPushNotification("Notification to Operator : " +
                     "Excessive Bills paid in the last 5 minutes amounting to a sum greater than 20000");
         }
     }
@@ -63,5 +65,24 @@ public class ExcessivePayEventRule implements Rule {
     @Override
     public void toggle() {
         this.isEnabled = !this.isEnabled;
+    }
+    @Override
+    public void setConstraint1(Integer constraint1) {
+        this.constraint1 = constraint1;
+    }
+
+    @Override
+    public Integer getConstraint1() {
+        return this.constraint1;
+    }
+
+    @Override
+    public void setConstraint2(Integer constraint2) {
+        this.constraint2 = constraint2;
+    }
+
+    @Override
+    public Integer getConstraint2() {
+        return this.constraint2;
     }
 }

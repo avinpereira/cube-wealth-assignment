@@ -9,4 +9,8 @@ public interface Rule {
     void setDescription(String description);
     String getDescription();
     void toggle();
+    void setConstraint1(Integer constraint1);
+    Integer getConstraint1();
+    void setConstraint2(Integer constraint2);
+    Integer getConstraint2();
 }

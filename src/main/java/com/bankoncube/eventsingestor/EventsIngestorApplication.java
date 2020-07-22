@@ -37,8 +37,5 @@ public class EventsIngestorApplication implements CommandLineRunner {
 
 		//Enabling All Rules at Start Up
 		rules.forEach(r -> r.enable(true));
-		log.info("Logger is Working");
-
-
 	}
 }

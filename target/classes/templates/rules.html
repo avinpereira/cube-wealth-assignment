@@ -17,7 +17,6 @@
 <!--</html>-->
 
 
-
 <html xmlns:th="https://www.thymeleaf.org/">
 
 <head>
@@ -30,7 +29,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <script type="text/javascript" th:src= "@{/js/actions.js}"></script>
+    <script type="text/javascript" th:src="@{/js/actions.js}"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -62,6 +61,9 @@
                 font-size: 3.5rem;
             }
         }
+
+
+
     </style>
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
@@ -91,6 +93,9 @@
             -webkit-animation: chartjs-render-animation 0.001s;
             animation: chartjs-render-animation 0.001s;
         }
+
+
+
     </style>
 </head>
 
@@ -291,18 +296,84 @@
                             <th scope="col">Description</th>
                             <th scope="col">Current Status</th>
                             <th scope="col">Toggle Status</th>
+                            <th scope="col">Constraint 1</th>
+                            <th scope="col">Constraint 2</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="currentRule, stat : ${wrapper.ruleList}">
-                            <td th:text="${stat.index + 1}"></td>
-                            <td th:text="${currentRule.description}"></td>
-                            <td th:text="${currentRule.status}"></td>
-                            <td><input type="checkbox" th:name="|ruleList[${stat.index}].description|"
-                                       th:value="${currentRule.getDescription()}" th:checked="${currentRule.selected}" /></td>
+                            <td th:text="${stat.count}"></td>
+                            <td>
+                                <input type="hidden" th:text="${currentRule.getDescription()}" readonly
+                                       th:name="|ruleList[${stat.index}]|"
+                                       th:value="${currentRule.getDescription()}"
+                                       th:field="*{ruleList[__${stat.index}__].description}"
+                                />
+                            </td>
+                            <td th:text="${currentRule.getStatus()}"
+                                th:field="*{ruleList[__${stat.index}__].status}"
+                                th:value="${currentRule.getStatus()}"
+                            ></td>
+                            <td>
+                                <input type="checkbox"
+                                       th:name="|ruleList[${stat.index}]|"
+                                       th:value="${currentRule.getDescription()}"
+                                       th:checked="${currentRule.selected}"
+                                       th:field="*{ruleList[__${stat.index}__].selected}">
+                            </td>
+                            <td>
+                                <input type="text" readonly="readonly"
+                                       th:name="|ruleList[${stat.index}]|"
+                                       th:value="${currentRule.getConstraint1()}"
+                                       th:field="*{ruleList[__${stat.index}__].constraint1}"
+                                />
+                            </td>
+                            <td>
+                                <input type="text" readonly="readonly"
+                                       th:name="|ruleList[${stat.index}]|"
+                                       th:value="${currentRule.getConstraint2()}"
+                                       th:field="*{ruleList[__${stat.index}__].constraint2}"
+                                />
+                            </td>
 
+
+<!--                                                        <td th:text="${currentRule.getDescription()}"-->
+<!--                                                            th:field="*{ruleList[__${stat.index}__].description}"-->
+<!--                                                            th:value="${currentRule.getDescription()}"-->
+<!--                                                        ></td>-->
+<!--                                                        <td th:text="${currentRule.getStatus()}"-->
+<!--                                                            th:field="*{ruleList[__${stat.index}__].status}"-->
+<!--                                                            th:value="${currentRule.getStatus()}"-->
+<!--                                                        ></td>-->
+<!--                                                        <td>-->
+<!--                                                            <input type="checkbox"-->
+<!--                                                                   th:name="|ruleList[${stat.index}]|"-->
+<!--                                                                   th:value="${currentRule.getDescription()}"-->
+<!--                                                                   th:checked="${currentRule.selected}"-->
+<!--                                                                   th:field="*{ruleList[__${stat.index}__].selected}">-->
+<!--                                                        </td>-->
+<!--                                                        <td th:text="${currentRule.getConstraint1()}"-->
+<!--                                                            th:field="*{ruleList[__${stat.index}__].constraint1}"-->
+<!--                                                            th:value="${currentRule.getConstraint1()}"-->
+<!--                                                        ></td><td th:text="${currentRule.getConstraint2()}"-->
+<!--                                                                  th:field="*{ruleList[__${stat.index}__].constraint2}"-->
+<!--                                                                  th:value="${currentRule.getConstraint2()}"-->
+<!--                                                    ></td>-->
                         </tr>
                         </tbody>
+
+                        <!--                        <tbody>-->
+                        <!--                        <tr th:each="currentRule, stat : ${wrapper.ruleList}">-->
+                        <!--                            <td th:text="${stat.index + 1}"></td>-->
+                        <!--                            <td th:text="${currentRule.description}"></td>-->
+                        <!--                            <td th:text="${currentRule.status}"></td>-->
+                        <!--                            <td><input type="checkbox" th:name="|ruleList[${stat.index}].description|"-->
+                        <!--                                       th:value="${currentRule.getDescription()}" th:checked="${currentRule.selected}" /></td>-->
+                        <!--                            <td><input type="number"  th:value="${currentRule.getConstraint1()}"/></td>-->
+                        <!--                            <td><input type="number"  th:value="${currentRule.getConstraint2()}"/></td>-->
+                        <!--                        </tr>-->
+                        <!--                        </tbody>-->
+
                     </table>
                     <button type="submit" value="submit" class="btn btn-success">Submit</button>
                 </form>
@@ -314,7 +385,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')
+
+
+</script>
 <script src="/docs/4.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd"
         crossorigin="anonymous"></script>
@@ -325,7 +399,6 @@
 </body>
 
 </html>
-
 
 
 <!--&lt;!&ndash;&lt;!&ndash; <!DOCTYPE html>&ndash;&gt;-->
@@ -345,7 +418,6 @@
 <!--&lt;!&ndash;</body>&ndash;&gt;-->
 
 <!--&lt;!&ndash;</html>&ndash;&gt;-->
-
 
 
 <!--<html xmlns:th="https://www.thymeleaf.org/">-->
@@ -662,7 +734,6 @@
 <!--                </tr>-->
 <!--                </tbody>-->
 <!--            </table>-->
-
 
 
 <!--            &lt;!&ndash;            <h2>Section title</h2>&ndash;&gt;-->

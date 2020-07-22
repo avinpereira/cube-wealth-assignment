@@ -12,7 +12,9 @@ public class NotificationRule implements Rule {
 
     private NotificationService notificationService;
     private boolean isEnabled;
-    private String description = "This is a Notification Rule";
+    private String description = "Trigger a push notification on every {constraint1} bill pay event for the user";
+    private Integer constraint1 = 1;
+    private Integer constraint2 = 0;
 
     @Autowired
     public NotificationRule(NotificationService notificationService) {
@@ -21,7 +23,7 @@ public class NotificationRule implements Rule {
 
     @Override
     public void implementRule(Customer customer) {
-        if(customer.getEvents().isEmpty() || customer.getEvents().size() == 1) notificationService.sendPushNotification("Congrats on your first Event");
+        if(customer.getEvents().isEmpty() || customer.getEvents().size() <= this.constraint1) notificationService.sendPushNotification("Congrats on your first Event");
     }
 
     @Override
@@ -47,5 +49,25 @@ public class NotificationRule implements Rule {
     @Override
     public void toggle() {
         this.isEnabled = !this.isEnabled;
+    }
+
+    @Override
+    public void setConstraint1(Integer constraint1) {
+        this.constraint1 = constraint1;
+    }
+
+    @Override
+    public Integer getConstraint1() {
+        return this.constraint1;
+    }
+
+    @Override
+    public void setConstraint2(Integer constraint2) {
+        this.constraint2 = constraint2;
+    }
+
+    @Override
+    public Integer getConstraint2() {
+        return this.constraint2;
     }
 }
