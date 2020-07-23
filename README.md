@@ -4,7 +4,7 @@ Built using Spring Boot & PostgreSQL
 # Assignment Description
 
 EventsIngestorService is a Web Application that ingests Event Streams based on certain Rules Defined Using the Framework.
-
+* [Assignment Description](https://docs.google.com/document/d/104tTs8_A0LvlFxK0I7PCV0RZdQPvOim4x_khjv8Uis8/edit)
 ## Getting Started
 
 
@@ -16,129 +16,102 @@ What things you need to install the software and how to install them
 ```
 Give examples
 ```
-
+## Framework Design
 ### Creating a new Rule
 
 I have implemented a simple Framework that will allow a developer to solely work on the implementation logic of the Rule.
 
 
-1.Creating a Spring Bean.
+1.Create a Configuration class.
 <br/>
-This bean will represent the Rule
+Annotate this class with @Configuration
+<br/>
+This is where you will configure all the rules to be implemented.
+
+
 
 ```
-@Component /*Marking this class as a Spring Bean*/
-public class NewRule {
+@Configuration /*Marking this class as a Spring Configuration class*/
+public class RulesConfiguration {
     
 }
 ```
 
-2.Implement the Rule Interface
+2.Create a new method that returns an object of Rule.class
+<br/>
+Annotate the method with @Bean marking the returned object as a spring bean.
 
 ```
-@Component
-public class NewRule implements Rule{
+@Configuration
+public class RulesConfiguration {
 
-    @Override
-    public void implementRule(Customer customer) {
-        
-    }
+    @Bean
+    Rule exampleRule(){
+        Rule exampleRule = new Rule() {
+            @Override
+            public void implementRule(Customer customer) {
 
-    @Override
-    public void enable(boolean isEnabled) {
-
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
-    @Override
-    public void setDescription(String description) {
-
-    }
-
-    @Override
-    public String getDescription() {
-        return null;
-    }
-
-    @Override
-    public void toggle() {
-
+                // Implement the Rule Logic here ....
+                //......
+                //......
+            }
+        };
+        exampleRule.setConstraint1(1); //Configurable Constraint
+        exampleRule.setConstraint2(null); //Configurable Constraint
+        exampleRule.setDescription("Description of the Rule to be shown on the Dashboard");
+        return exampleRule;
     }
 }
 ```
 
-3.Provide an Implementation & Description to the NewRule.<br/>( All Rules will be enabled at Application Start up )
-```
-@Component
-public class NewRule implements Rule{
-    private boolean isEnabled;
-    private String description = "This Description will be displayed on the Dashboard to the Admin";
 
-    @Override
-    public void implementRule(Customer customer) {
-        List<Event> events = customer.getEvents();
-        /* Implement some Rules based on the requirements */
-        /* Ex: Sending Notification for the First Pay Event etc. . . */
-    }
 
-    @Override
-    public void enable(boolean isEnabled) {
-        this.isEnabled = isEnabled;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.isEnabled;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getDescription() {
-        return  this.description;
-    }
-
-    @Override
-    public void toggle() {
-        this.isEnabled = !this.isEnabled;
-    }
-}
-```
 ## Benefits of this Framework
 
-The purpose behind this framework was simply to ease the task of implementing new Rules without worrying about how the code works under the hood. 
+The purpose behind this framework was simply to ease the task of implementing new Rules without worrying about how the code works under the hood.
+A Developer could simply create an object of Rule.class , mark it as a Spring Bean and provide the implementation.
+
+All Rules will be enabled at Application Start - Up.
+<br/>
+Implemented Rules can be disabled at the Dashboard. 
 
 ## Accessing the Admin Dashboard
-
-Users with Admin access will be able to log into the Dashboard
+* The Admin Dashboard has been rendered using Spring MVC & Thymeleaf Templating Engine.
+* Users with Admin access will be able to log into the Dashboard.
+<br/>
+* The Dashboard is available at the URL mentioned below.
+<br/>
+* The default configured Admin user has the credentials specified below.
+<br/>
+* Authentication is of type "InMemoryAuthentication" and has been implemented using Spring Security.
 
 ```
 URL : http://localhost:8081/api/admin
-UserName: user
-Password: password
+UserName: admin
+Password: adminpass
 ```
 
 ### About the DashBoard
-A Simple UI that enables 
+This Dashboard is intended to be a Simple UI that lets the Admin perform the following actions.
 ```
-Admin User to enable/disable implemented Rules at Runtime without restarting the Application.
+1.Enable/Disable implemented Rules at Runtime without restarting the Application.
+2. Configure/Tune the Constraints as required.
 ```
+### Push Notification & Operational Notifications
+* External Calls/Notifications have been mocked by logs.
+* The same logs can be found printed on the console as well as the "push-notifications.log" file in the class path.
 
-
+### Database 
+* PostgreSQL has been used.
+* Schema involves a Customer Entity which has a OnetoMany mapping to Event Entity.
+ 
 ## Built With
 
 * [Spring Boot](https://start.spring.io/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
 
 
-## Authors
+## Author
 
 * **Avin Pereira** - *Assignment work* - [GitHub](https://github.com/PurpleBooth)
 
