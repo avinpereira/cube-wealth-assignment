@@ -37,7 +37,8 @@ public class ExcessivePayEventRule implements Rule {
             double doubleStream = eventList.stream()
                     .mapToDouble(e -> e.getProperty().getValue()).sum();
             if(doubleStream >= this.constraint1) notificationService.sendPushNotification("Notification to Operator : " +
-                    "Excessive Bills paid in the last 5 minutes amounting to a sum greater than 20000");
+                    "Excessive Bills paid in the last 5 minutes amounting to a sum greater than " +
+                    this.constraint1);
         }
     }
 
