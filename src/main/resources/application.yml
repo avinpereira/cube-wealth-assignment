@@ -3,12 +3,12 @@ server:
 spring:
   thymeleaf:
     cache: false
-  security:
-    user:
-      name: user
-      password: password
-      roles:
-        - ADMIN
+#  security:
+#    user:
+#      name: user
+#      password: password
+#      roles:
+#        - ADMIN
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost/event}
     username: "postgres"
