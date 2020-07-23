@@ -33,7 +33,6 @@ public class RulesConfiguration {
     }
 
 
-
     @Bean
     Rule excessivePayEventRule(){
         Rule excessivePayEventRule = new Rule() {
@@ -57,8 +56,8 @@ public class RulesConfiguration {
             }
         };
         excessivePayEventRule.setDescription("Alert user if 5 or more bill pay events of total value >= {constraint1} happen within {constraint2} minutes time window");
-        excessivePayEventRule.setConstraint1(20000);
-        excessivePayEventRule.setConstraint2(5);
+        excessivePayEventRule.setConstraint1(20000); // Default constraint1 Amount : 20000
+        excessivePayEventRule.setConstraint2(5); //Default constraint2 Minutes: 5
         return excessivePayEventRule;
     }
 }

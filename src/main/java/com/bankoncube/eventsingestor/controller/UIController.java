@@ -56,7 +56,6 @@ public class UIController {
         RulesWithSelectionListWrapper wrapper = new RulesWithSelectionListWrapper();
         wrapper.setRuleList(allRulesWithSelection);
         model.addAttribute("wrapper", wrapper);
-
         return "rules";
     }
 
