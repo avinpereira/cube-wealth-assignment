@@ -1,4 +1,4 @@
-package com.bankoncube.eventsingestor.configuration;
+package com.bankoncube.eventsingestor.configuration.security;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
