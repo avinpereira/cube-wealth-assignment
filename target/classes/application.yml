@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   thymeleaf:
     cache: false
@@ -10,9 +10,9 @@ spring:
 #      roles:
 #        - ADMIN
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost/event}
-    username: "postgres"
-    password: "docker"
+    url: jdbc:postgresql://postgresqldb:5432/event
+    username: postgres
+    password: docker
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: false
