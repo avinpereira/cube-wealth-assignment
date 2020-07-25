@@ -17,6 +17,6 @@ RUN mvn -f /usr/src/app/pom.xml clean install -DskipTests=true
 
 
 FROM adoptopenjdk/openjdk11:alpine-jre
-COPY --from=build /usr/src/app/target/*.jar /usr/src/app/app.jar
+COPY --from=build /usr/src/app/target/event-ingestor-service.jar /usr/src/app/app.jar
 #ADD target/*.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
