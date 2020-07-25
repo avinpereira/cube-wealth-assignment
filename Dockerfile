@@ -12,5 +12,5 @@
 
 
 FROM adoptopenjdk/openjdk11:alpine-jre
-ADD target/*.jar app.jar
+ADD target/event-ingestor-service.jar /app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
