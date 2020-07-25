@@ -11,10 +11,13 @@ EventsIngestorService is a Web Application that ingests Event Streams based on c
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Follow these steps to get the project to run on your system.
 
 ```
-Give examples
+1. Clone the repository
+2. Make sure you have docker daemon up and running
+3. cd into the project 
+4. Run the command "sudo docker-compose up --build"
 ```
 ## Framework Design
 ### Creating a new Rule
@@ -97,6 +100,10 @@ This Dashboard is intended to be a Simple UI that lets the Admin perform the fol
 1.Enable/Disable implemented Rules at Runtime without restarting the Application.
 2. Configure/Tune the Constraints as required.
 ```
+
+### Events Endpoint
+This service ingests events send to it @ localhost:8080/api/v1/events
+
 ### Push Notification & Operational Notifications
 * External Calls/Notifications have been mocked by logs.
 * The same logs can be found printed on the console as well as the "push-notifications.log" file in the class path.
