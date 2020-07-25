@@ -1,4 +1,5 @@
-#FROM maven:3.6.1-jdk-8-slim AS build
+FROM maven:3.6.1-jdk-8-slim AS build
+RUN mvn clean install -DskipTests=true
 #RUN mkdir -p /workspace
 #WORKDIR /workspace
 #COPY pom.xml /workspace
