@@ -1,9 +1,4 @@
-FROM maven:3.6.1-jdk-8-slim AS build
-COPY src /usr/src/app/src
-COPY pom.xml /usr/src/app
-RUN mvn -f /usr/src/app/pom.xml clean install -DskipTests=true
-
-#RUN mvn pom.xml clean install -DskipTests=true
+#FROM maven:3.6.1-jdk-8-slim AS build
 #RUN mkdir -p /workspace
 #WORKDIR /workspace
 #COPY pom.xml /workspace
@@ -17,6 +12,5 @@ RUN mvn -f /usr/src/app/pom.xml clean install -DskipTests=true
 
 
 FROM adoptopenjdk/openjdk11:alpine-jre
-COPY --from=build /usr/src/app/target/event-ingestor-service.jar /usr/src/app/app.jar
-#ADD target/*.jar app.jar
+ADD target/*.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
