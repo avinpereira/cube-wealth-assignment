@@ -1,5 +1,9 @@
 FROM maven:3.6.1-jdk-8-slim AS build
-RUN mvn clean install -DskipTests=true
+COPY src /usr/src/app/src
+COPY pom.xml /usr/src/app
+RUN mvn -f /usr/src/app/pom.xml clean package
+
+#RUN mvn pom.xml clean install -DskipTests=true
 #RUN mkdir -p /workspace
 #WORKDIR /workspace
 #COPY pom.xml /workspace
@@ -13,5 +17,6 @@ RUN mvn clean install -DskipTests=true
 
 
 FROM adoptopenjdk/openjdk11:alpine-jre
-ADD target/*.jar app.jar
+COPY --from=build /usr/src/app/target/*T.jar /usr/app/app.jar
+#ADD target/*.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
