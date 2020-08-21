@@ -13,4 +13,4 @@
 
 FROM adoptopenjdk/openjdk11:alpine-jre
 ADD target/event-ingestor-service.jar /app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-XX:+PrintCodeCache","-jar","app.jar"]
